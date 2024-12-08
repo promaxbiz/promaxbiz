@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:promaxbiz/model/web_model.dart';
-import 'package:promaxbiz/pages/load_screen.dart';
+// import 'package:promaxbiz/pages/load_screen.dart';
 import 'package:promaxbiz/pages/my_home_page.dart';
 import 'package:promaxbiz/theme/palette_dark.dart';
 import 'package:promaxbiz/utils/my_error_widget.dart';
@@ -28,7 +28,7 @@ class MyWeb extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    WebModel webModel = Provider.of<WebModel>(context, listen: true);
+    // WebModel webModel = Provider.of<WebModel>(context, listen: true);
     return MaterialApp(
       title: 'Pro Max Biz',
       theme: ThemeData(
@@ -169,19 +169,23 @@ class MyWeb extends StatelessWidget {
         }
         throw ('widget is null');
       },
-      home: FutureBuilder(
-        future: Provider.of<WebModel>(context, listen: false).initialize(),
-        builder: (ctx, snap) {
-          if (!webModel.loaded) {
-            return const LoadScreen();
-          } else {
-            return const MyHomePage();
-          }
-        },
-      ),
+      initialRoute: "/",
+      // home: FutureBuilder(
+      //   future: Provider.of<WebModel>(context, listen: false).initialize(),
+      //   builder: (ctx, snap) {
+      //     if (!webModel.loaded) {
+      //       return const LoadScreen();
+      //     } else {
+      //       return const MyHomePage();
+      //     }
+      //   },
+      // ),
+      // routes: {
+      //   LoadScreen.name: (context) => const LoadScreen(),
+      //   MyHomePage.name: (context) => const MyHomePage(),
+      // },
       routes: {
-        LoadScreen.name: (context) => const LoadScreen(),
-        MyHomePage.name: (context) => const MyHomePage(),
+        "/": (context) => const MyHomePage(),
       },
     );
   }

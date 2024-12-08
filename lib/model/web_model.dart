@@ -8,7 +8,14 @@ class WebModel with ChangeNotifier {
   bool loaded = false;
   String currentWidgetToShow = widgetSlideShow;
 
-  WebModel(this.context);
+  WebModel(this.context) {
+    if (!loaded) {
+      // await Future.delayed(const Duration(seconds: 5), () {});
+      currentWidgetToShow = widgetSlideShow;
+    }
+    loaded = true;
+    notifyListeners();
+  }
 
   Future<void> initialize() async {
     if (!loaded) {
