@@ -6,12 +6,10 @@ class WebModel with ChangeNotifier {
   final BuildContext context;
 
   bool loaded = false;
-  String currentWidgetToShow = widgetSlideShow;
 
   WebModel(this.context) {
     if (!loaded) {
       // await Future.delayed(const Duration(seconds: 5), () {});
-      currentWidgetToShow = widgetSlideShow;
     }
     loaded = true;
     notifyListeners();
@@ -20,14 +18,8 @@ class WebModel with ChangeNotifier {
   Future<void> initialize() async {
     if (!loaded) {
       // await Future.delayed(const Duration(seconds: 5), () {});
-      currentWidgetToShow = widgetSlideShow;
     }
     loaded = true;
-    notifyListeners();
-  }
-
-  void setCurrentMenu(String newMenu) {
-    currentWidgetToShow = newMenu;
     notifyListeners();
   }
 
@@ -96,31 +88,31 @@ class WebModel with ChangeNotifier {
     );
   }
 
-  List<Widget> getMenuOptions(BuildContext context) {
-    return [
-      TextButton(
-        // onPressed: () => Navigator.pushNamedAndRemoveUntil(
-        //   context,
-        //   MyHomePage.name,
-        //   ModalRoute.withName(
-        //     Navigator.defaultRouteName,
-        //   ),
-        // ),
-        onPressed: () => setCurrentMenu(widgetSlideShow),
-        child: Text(
-          "HOME",
-          style: Theme.of(context).textTheme.titleSmall,
-        ),
-      ),
-      TextButton(
-        onPressed: () {
-          setCurrentMenu(widgetAbout);
-        },
-        child: Text(
-          "ABOUT",
-          style: Theme.of(context).textTheme.titleSmall,
-        ),
-      ),
-    ];
-  }
+  // List<Widget> getMenuOptions(BuildContext context) {
+  //   return [
+  //     TextButton(
+  //       // onPressed: () => Navigator.pushNamedAndRemoveUntil(
+  //       //   context,
+  //       //   MyHomePage.name,
+  //       //   ModalRoute.withName(
+  //       //     Navigator.defaultRouteName,
+  //       //   ),
+  //       // ),
+  //       onPressed: () => setCurrentMenu(widgetSlideShow),
+  //       child: Text(
+  //         "HOME",
+  //         style: Theme.of(context).textTheme.titleSmall,
+  //       ),
+  //     ),
+  //     TextButton(
+  //       onPressed: () {
+  //         setCurrentMenu(widgetAbout);
+  //       },
+  //       child: Text(
+  //         "ABOUT",
+  //         style: Theme.of(context).textTheme.titleSmall,
+  //       ),
+  //     ),
+  //   ];
+  // }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:promaxbiz/model/web_model.dart';
-import 'package:provider/provider.dart';
-import 'package:responsive_framework/responsive_framework.dart';
+import 'package:promaxbiz/utils/constants.dart';
 
 /// Menu/Navigation Bar
 ///
@@ -10,11 +9,19 @@ import 'package:responsive_framework/responsive_framework.dart';
 /// a hamburger menu on screens smaller than 400px.
 
 class WebMenuBar extends StatelessWidget {
-  const WebMenuBar({super.key});
+  final WebModel webModel;
+
+  final Function switchScreen;
+  const WebMenuBar(
+      {super.key, required this.webModel, required this.switchScreen});
 
   @override
   Widget build(BuildContext context) {
-    WebModel webModel = Provider.of<WebModel>(context, listen: true);
+    // double appHeight = MediaQuery.of(context).size.height -
+    //     MediaQuery.of(context).viewPadding.top -
+    //     MediaQuery.of(context).viewPadding.bottom;
+
+    double appWidth = MediaQuery.of(context).size.width;
     return Flexible(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -22,19 +29,37 @@ class WebMenuBar extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              if (ResponsiveBreakpoints.of(context).screenWidth > 200)
-                webModel.getWebAppLogo(context),
-              if (ResponsiveBreakpoints.of(context).isDesktop ||
-                  ResponsiveBreakpoints.of(context).isTablet)
-                webModel.getWebAppTitle(context),
+              if (appWidth > 200) webModel.getWebAppLogo(context),
+              if (appWidth > 600) webModel.getWebAppTitle(context),
             ],
           ),
-          if (ResponsiveBreakpoints.of(context).isDesktop)
+          if (appWidth > 600)
             Container(
               alignment: Alignment.centerRight,
               child: Wrap(
                 children: [
-                  ...webModel.getMenuOptions(context),
+                  //...webModel.getMenuOptions(context),
+                  TextButton(
+                    // onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                    //   context,
+                    //   MyHomePage.name,
+                    //   ModalRoute.withName(
+                    //     Navigator.defaultRouteName,
+                    //   ),
+                    // ),
+                    onPressed: () => switchScreen(widgetSlideShow),
+                    child: Text(
+                      "HOME",
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => switchScreen(widgetAbout),
+                    child: Text(
+                      "ABOUT",
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ),
                 ],
               ),
             ),

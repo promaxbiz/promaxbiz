@@ -5,8 +5,6 @@ import 'package:promaxbiz/widgets/app_drawer.dart';
 import 'package:promaxbiz/widgets/footer.dart';
 import 'package:promaxbiz/widgets/slide_show.dart';
 import 'package:promaxbiz/widgets/web_menu_bar.dart';
-import 'package:provider/provider.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -17,31 +15,52 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool initPage = false;
+  late WebModel webModel;
+  late double appHeight, appWidth;
+  String currentWidgetToShow = widgetSlideShow;
+  void switchScreen(String screenName) {
+    setState(() {
+      currentWidgetToShow = screenName;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    WebModel webModel = Provider.of<WebModel>(context, listen: true);
-    double appHeight = MediaQuery.of(context).size.height -
+    if (!initPage) {
+      webModel = WebModel(context);
+
+      initPage = true;
+    }
+
+    appHeight = MediaQuery.of(context).size.height -
         MediaQuery.of(context).viewPadding.top -
         MediaQuery.of(context).viewPadding.bottom;
 
-    double appWidth = MediaQuery.of(context).size.width;
+    appWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      endDrawer: (ResponsiveBreakpoints.of(context).isDesktop)
+      endDrawer: (appWidth > 600)
           ? null
           : AppDrawer(
               appHeight: appHeight,
               appWidth: appWidth,
+              webModel: webModel,
+              switchScreen: switchScreen,
             ),
       appBar: AppBar(
         toolbarHeight: appHeight * 0.15,
-        title: const WebMenuBar(),
+        title: WebMenuBar(
+          webModel: webModel,
+          switchScreen: switchScreen,
+        ),
         automaticallyImplyLeading: false,
       ),
       body: CustomScrollView(
         slivers: [
           SliverList.list(
             children: [
-              if (webModel.currentWidgetToShow == widgetSlideShow)
+              if (currentWidgetToShow == widgetSlideShow)
                 SlideShow(
                   slideShowHeight: appHeight * 0.8,
                   slideShowWidth: appWidth,

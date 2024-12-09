@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:promaxbiz/model/web_model.dart';
-import 'package:provider/provider.dart';
+import 'package:promaxbiz/utils/constants.dart';
 // import 'package:promaxbiz/components/menu_options.dart';
 
 class AppDrawer extends StatelessWidget {
   final double appWidth, appHeight;
+  final WebModel webModel;
+  final Function switchScreen;
   const AppDrawer({
     super.key,
     required this.appWidth,
     required this.appHeight,
+    required this.webModel,
+    required this.switchScreen,
   });
 
   @override
   Widget build(BuildContext context) {
-    WebModel webModel = Provider.of<WebModel>(context, listen: true);
     return SizedBox(
       width: appWidth * 0.3,
       child: Drawer(
@@ -23,7 +26,28 @@ class AppDrawer extends StatelessWidget {
             DrawerHeader(
               child: webModel.getWebAppLogo(context),
             ),
-            ...webModel.getMenuOptions(context),
+            // ...webModel.getMenuOptions(context),
+            TextButton(
+              // onPressed: () => Navigator.pushNamedAndRemoveUntil(
+              //   context,
+              //   MyHomePage.name,
+              //   ModalRoute.withName(
+              //     Navigator.defaultRouteName,
+              //   ),
+              // ),
+              onPressed: () => switchScreen(widgetSlideShow),
+              child: Text(
+                "HOME",
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+            ),
+            TextButton(
+              onPressed: () => switchScreen(widgetAbout),
+              child: Text(
+                "ABOUT",
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+            ),
           ],
         ),
       ),
