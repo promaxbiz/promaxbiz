@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:promaxbiz/model/web_model.dart';
 import 'package:promaxbiz/utils/constants.dart';
+import 'package:promaxbiz/widgets/contact_us.dart';
 import 'package:promaxbiz/widgets/app_drawer.dart';
 import 'package:promaxbiz/widgets/footer.dart';
 import 'package:promaxbiz/widgets/slide_show.dart';
@@ -62,11 +63,11 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               if (currentWidgetToShow == widgetSlideShow)
                 SlideShow(
-                  slideShowHeight: appHeight * 0.8,
+                  slideShowHeight: appHeight * 0.7,
                   slideShowWidth: appWidth,
                 )
               else
-                const Text("About PromaxBiz"),
+                const Contact(),
               const Divider(),
               const Footer(),
             ],

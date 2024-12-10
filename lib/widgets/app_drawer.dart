@@ -44,7 +44,7 @@ class AppDrawer extends StatelessWidget {
             TextButton(
               onPressed: () => switchScreen(widgetAbout),
               child: Text(
-                "ABOUT",
+                "CONTACT",
                 style: Theme.of(context).textTheme.titleSmall,
               ),
             ),

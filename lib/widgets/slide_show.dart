@@ -79,7 +79,7 @@ class _SlideShowState extends State<SlideShow> {
       height: widget.slideShowHeight,
       width: widget.slideShowWidth,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Stack(
             children: [

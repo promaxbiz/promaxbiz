@@ -62,7 +62,7 @@ class _WebMenuBarState extends State<WebMenuBar> {
                 TextButton(
                   onPressed: () => widget.switchScreen(widgetAbout),
                   child: Text(
-                    "ABOUT",
+                    "CONTACT",
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                 ),
