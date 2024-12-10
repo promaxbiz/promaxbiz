@@ -8,7 +8,7 @@ import 'package:promaxbiz/utils/constants.dart';
 /// navigation links. Navigation links collapse into
 /// a hamburger menu on screens smaller than 400px.
 
-class WebMenuBar extends StatelessWidget {
+class WebMenuBar extends StatefulWidget {
   final WebModel webModel;
 
   final Function switchScreen;
@@ -16,55 +16,60 @@ class WebMenuBar extends StatelessWidget {
       {super.key, required this.webModel, required this.switchScreen});
 
   @override
+  State<WebMenuBar> createState() => _WebMenuBarState();
+}
+
+class _WebMenuBarState extends State<WebMenuBar> {
+  @override
   Widget build(BuildContext context) {
     // double appHeight = MediaQuery.of(context).size.height -
     //     MediaQuery.of(context).viewPadding.top -
     //     MediaQuery.of(context).viewPadding.bottom;
 
     double appWidth = MediaQuery.of(context).size.width;
-    return Flexible(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              if (appWidth > 200) webModel.getWebAppLogo(context),
-              if (appWidth > 600) webModel.getWebAppTitle(context),
-            ],
-          ),
-          if (appWidth > 600)
-            Container(
-              alignment: Alignment.centerRight,
-              child: Wrap(
-                children: [
-                  //...webModel.getMenuOptions(context),
-                  TextButton(
-                    // onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                    //   context,
-                    //   MyHomePage.name,
-                    //   ModalRoute.withName(
-                    //     Navigator.defaultRouteName,
-                    //   ),
-                    // ),
-                    onPressed: () => switchScreen(widgetSlideShow),
-                    child: Text(
-                      "HOME",
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            if (appWidth > 200) widget.webModel.getWebAppLogo(context),
+            if (appWidth > 600) widget.webModel.getWebAppTitle(context),
+            // webModel.getWebAppLogo(context),
+            // webModel.getWebAppTitle(context),
+          ],
+        ),
+        if (appWidth > 600)
+          Container(
+            alignment: Alignment.centerRight,
+            child: Wrap(
+              children: [
+                //...webModel.getMenuOptions(context),
+                TextButton(
+                  // onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                  //   context,
+                  //   MyHomePage.name,
+                  //   ModalRoute.withName(
+                  //     Navigator.defaultRouteName,
+                  //   ),
+                  // ),
+                  onPressed: () => widget.switchScreen(widgetSlideShow),
+                  child: Text(
+                    "HOME",
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
-                  TextButton(
-                    onPressed: () => switchScreen(widgetAbout),
-                    child: Text(
-                      "ABOUT",
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
+                ),
+                TextButton(
+                  onPressed: () => widget.switchScreen(widgetAbout),
+                  child: Text(
+                    "ABOUT",
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-        ],
-      ),
+          ),
+      ],
     );
   }
 }

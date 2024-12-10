@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:promaxbiz/utils/constants.dart';
+import 'package:promaxbiz/widgets/cat_ad.dart';
+import 'package:promaxbiz/widgets/cpp_tut_ad.dart';
 
 class SlideShow extends StatefulWidget {
   final double slideShowHeight, slideShowWidth;
@@ -21,24 +23,8 @@ class _SlideShowState extends State<SlideShow> {
   bool pageInit = false, playingSlides = true;
 
   List<Widget> slides = [
-    Container(
-      decoration: const BoxDecoration(
-        color: Colors.green,
-      ),
-      child: const Text("1 Green"),
-    ),
-    Container(
-      decoration: const BoxDecoration(
-        color: Colors.yellow,
-      ),
-      child: const Text("2 Yellow"),
-    ),
-    Container(
-      decoration: const BoxDecoration(
-        color: Colors.pink,
-      ),
-      child: const Text("3 Pink"),
-    ),
+    const CatAd(),
+    const CppTutAd(),
   ];
 
   void incrementSlide() {
@@ -113,7 +99,9 @@ class _SlideShowState extends State<SlideShow> {
                       startTimer();
                     }
 
-                    playingSlides = !playingSlides;
+                    setState(() {
+                      playingSlides = !playingSlides;
+                    });
                   },
                   child: Icon(
                     playingSlides ? Icons.play_arrow : Icons.pause,
