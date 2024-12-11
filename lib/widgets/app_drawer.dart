@@ -20,35 +20,45 @@ class AppDrawer extends StatelessWidget {
     return SizedBox(
       width: appWidth * 0.3,
       child: Drawer(
-        child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            DrawerHeader(
-              child: webModel.getWebAppLogo(context),
-            ),
-            // ...webModel.getMenuOptions(context),
-            TextButton(
-              // onPressed: () => Navigator.pushNamedAndRemoveUntil(
-              //   context,
-              //   MyHomePage.name,
-              //   ModalRoute.withName(
-              //     Navigator.defaultRouteName,
-              //   ),
-              // ),
-              onPressed: () => switchScreen(widgetSlideShow),
-              child: Text(
-                "HOME",
-                style: Theme.of(context).textTheme.titleSmall,
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                assetMap["appBarBackground"]!,
               ),
+              fit: BoxFit.none,
             ),
-            TextButton(
-              onPressed: () => switchScreen(widgetAbout),
-              child: Text(
-                "CONTACT",
-                style: Theme.of(context).textTheme.titleSmall,
+          ),
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              DrawerHeader(
+                child: webModel.getWebAppLogo(context),
               ),
-            ),
-          ],
+              // ...webModel.getMenuOptions(context),
+              TextButton(
+                // onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                //   context,
+                //   MyHomePage.name,
+                //   ModalRoute.withName(
+                //     Navigator.defaultRouteName,
+                //   ),
+                // ),
+                onPressed: () => switchScreen(widgetSlideShow),
+                child: Text(
+                  "HOME",
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+              ),
+              TextButton(
+                onPressed: () => switchScreen(widgetAbout),
+                child: Text(
+                  "CONTACT",
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

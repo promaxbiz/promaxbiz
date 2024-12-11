@@ -27,7 +27,7 @@ class WebModel with ChangeNotifier {
     // double appWidth = MediaQuery.of(context).size.width;
 
     return CircleAvatar(
-      radius: 50,
+      radius: 30,
       backgroundColor: Colors.amber,
       child: Image(
         image: AssetImage(
@@ -50,7 +50,7 @@ class WebModel with ChangeNotifier {
               "PRO",
               style: GoogleFonts.protestGuerrilla(
                 color: Colors.green,
-                fontSize: 40,
+                fontSize: 30,
                 letterSpacing: 3,
                 fontWeight: FontWeight.w500,
               ),
@@ -59,7 +59,7 @@ class WebModel with ChangeNotifier {
               "MAX",
               style: GoogleFonts.protestGuerrilla(
                 color: Colors.yellow,
-                fontSize: 40,
+                fontSize: 30,
                 letterSpacing: 3,
                 fontWeight: FontWeight.w500,
               ),
@@ -68,7 +68,7 @@ class WebModel with ChangeNotifier {
               "BIZ",
               style: GoogleFonts.protestGuerrilla(
                 color: Colors.pink,
-                fontSize: 40,
+                fontSize: 30,
                 letterSpacing: 3,
                 fontWeight: FontWeight.w500,
               ),
@@ -78,8 +78,8 @@ class WebModel with ChangeNotifier {
         Text(
           "Pro Ideas for Max Outcomes",
           style: GoogleFonts.prociono(
-            color: Colors.amber,
-            fontSize: 14,
+            // color: Colors.amber,
+            fontSize: 10,
             letterSpacing: 3,
             fontWeight: FontWeight.w500,
           ),

@@ -82,30 +82,27 @@ class _SlideShowState extends State<SlideShow> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Stack(
+            alignment: Alignment.bottomCenter,
             children: [
               SizedBox(
                 height: widget.slideShowHeight * 0.98,
                 width: double.infinity,
                 child: slides[currentSlide],
               ),
-              Positioned(
-                bottom: 5,
-                right: 5,
-                child: FloatingActionButton(
-                  onPressed: () {
-                    if (playingSlides) {
-                      stopTimer();
-                    } else {
-                      startTimer();
-                    }
+              IconButton(
+                onPressed: () {
+                  if (playingSlides) {
+                    stopTimer();
+                  } else {
+                    startTimer();
+                  }
 
-                    setState(() {
-                      playingSlides = !playingSlides;
-                    });
-                  },
-                  child: Icon(
-                    playingSlides ? Icons.play_arrow : Icons.pause,
-                  ),
+                  setState(() {
+                    playingSlides = !playingSlides;
+                  });
+                },
+                icon: Icon(
+                  playingSlides ? Icons.pause_circle : Icons.play_circle_fill,
                 ),
               ),
             ],
@@ -122,6 +119,7 @@ class _SlideShowState extends State<SlideShow> {
                     currentSlide = index;
                   }),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         width: (index == currentSlide)

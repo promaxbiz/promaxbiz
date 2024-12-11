@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 // MISC
 const widgetSlideShow = "slideshow";
 const widgetAbout = "about";
 
 const int slideShowDuration = 15;
-
-// Colors
-const Color textPrimary = Colors.black;
-const Color textSecondary = Colors.amber;
 
 // Margin
 const EdgeInsets marginBottom12 = EdgeInsets.only(bottom: 12);
@@ -34,32 +29,10 @@ Widget dividerSmall = Container(
   ),
 );
 
-//Text Styles
-TextStyle headlineTextStyle = GoogleFonts.montserrat(
-    textStyle: const TextStyle(
-        fontSize: 26,
-        color: textPrimary,
-        letterSpacing: 1.5,
-        fontWeight: FontWeight.w300));
-
-TextStyle headlineSecondaryTextStyle = GoogleFonts.montserrat(
-    textStyle: const TextStyle(
-        fontSize: 20, color: textPrimary, fontWeight: FontWeight.w300));
-
-TextStyle subtitleTextStyle = GoogleFonts.openSans(
-    textStyle:
-        const TextStyle(fontSize: 14, color: textSecondary, letterSpacing: 1));
-
-TextStyle bodyTextStyle = GoogleFonts.openSans(
-    textStyle: const TextStyle(fontSize: 14, color: textPrimary));
-
-TextStyle buttonTextStyle = GoogleFonts.montserrat(
-    textStyle:
-        const TextStyle(fontSize: 14, color: textPrimary, letterSpacing: 1));
-
 //assets
 const Map<String, String> assetMap = {
   'appProMaxBizLogo': 'assets/appicons/app_promaxbiz_logo.png',
   'appCatLogo': 'assets/appicons/app_cat_logo.png',
+  'tutCppLogo': 'assets/appicons/tut_cpp_logo.jpg',
   'appBarBackground': 'assets/images/background.jpg'
 };

@@ -11,7 +11,7 @@ class CppTutAd extends StatelessWidget {
       Text(
         "Lots of C++ Tutorials",
         style: GoogleFonts.prociono(
-          color: Colors.amber,
+          color: Colors.yellowAccent,
           fontSize: layoutWidth * 0.02,
           letterSpacing: 3,
           fontWeight: FontWeight.w500,
@@ -20,7 +20,7 @@ class CppTutAd extends StatelessWidget {
       Text(
         "but none of them are on Linux",
         style: GoogleFonts.prociono(
-          color: Colors.amber,
+          color: Colors.yellowAccent,
           fontSize: layoutWidth * 0.02,
           letterSpacing: 3,
           fontWeight: FontWeight.w500,
@@ -38,7 +38,7 @@ class CppTutAd extends StatelessWidget {
       Text(
         "Tutorial on Ubuntu Linux",
         style: GoogleFonts.prociono(
-          color: Colors.amber,
+          color: Colors.yellowAccent,
           fontSize: layoutWidth * 0.02,
           letterSpacing: 3,
           fontWeight: FontWeight.w500,
@@ -59,27 +59,21 @@ class CppTutAd extends StatelessWidget {
         return Container(
           padding: const EdgeInsets.all(50.0),
           decoration: BoxDecoration(
-            gradient: (boxConstraints.maxWidth > 500)
-                ? const LinearGradient(
-                    end: Alignment.center,
-                    colors: [
-                      Colors.blue,
-                      Colors.pink,
-                    ],
-                  )
-                : const RadialGradient(
-                    colors: [
-                      Colors.blue,
-                      Colors.pink,
-                    ],
-                  ),
+            gradient: LinearGradient(
+              //end: Alignment.center,
+              colors: [
+                Colors.black,
+                Colors.blueGrey.shade400,
+                if (boxConstraints.maxWidth < 500) Colors.black,
+              ],
+            ),
           ),
           child: (boxConstraints.maxWidth > 500)
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Image.asset(
-                      assetMap["appBarBackground"]!,
+                      assetMap["tutCppLogo"]!,
                       width: boxConstraints.maxWidth * 0.3,
                     ),
                     Column(
@@ -95,12 +89,13 @@ class CppTutAd extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      assetMap["appBarBackground"]!,
-                      width: boxConstraints.maxWidth * 0.3,
+                      assetMap["tutCppLogo"]!,
+                      width: boxConstraints.maxWidth * 0.9,
+                      // height: boxConstraints.maxHeight * 0.5,
                     ),
                     Column(
                       children: [
-                        ...getAdContent(context, boxConstraints.maxWidth)
+                        ...getAdContent(context, boxConstraints.maxWidth * 2)
                       ],
                     )
                   ],

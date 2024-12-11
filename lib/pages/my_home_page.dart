@@ -50,36 +50,74 @@ class _MyHomePageState extends State<MyHomePage> {
               switchScreen: switchScreen,
             ),
       appBar: AppBar(
-        toolbarHeight: appHeight * 0.15,
+        flexibleSpace: Image(
+          image: AssetImage(
+            assetMap["appBarBackground"]!,
+          ),
+          fit: BoxFit.none,
+        ),
+        toolbarHeight: appHeight * 0.10,
         title: WebMenuBar(
           webModel: webModel,
           switchScreen: switchScreen,
         ),
         automaticallyImplyLeading: false,
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverList.list(
-            children: [
-              if (currentWidgetToShow == widgetSlideShow)
-                SlideShow(
-                  slideShowHeight: appHeight * 0.7,
-                  slideShowWidth: appWidth,
-                )
-              else
-                const Contact(),
-              const Divider(),
-              const Footer(),
-            ],
-          ),
-          // SliverFillRemaining(
-          //   hasScrollBody: false,
-          //   child: MaxWidthBox(
-          //       maxWidth: 1200,
-          //       backgroundColor: Colors.white,
-          //       child: Container()),
-          // ),
-        ],
+      body: Container(
+        color: Colors.blueGrey.shade100,
+        // decoration: BoxDecoration(
+        //   image: DecorationImage(
+        //     image: AssetImage(
+        //       assetMap["appBarBackground"]!,
+        //     ),
+        //     fit: BoxFit.none,
+        //   ),
+        // ),
+
+        // child: CustomScrollView(
+        //   slivers: [
+        //     SliverList.list(
+        //       children: [
+        //         if (currentWidgetToShow == widgetSlideShow)
+        //           SlideShow(
+        //             slideShowHeight: appHeight * 0.7,
+        //             slideShowWidth: appWidth,
+        //           )
+        //         else
+        //           Contact(
+        //             slideShowHeight: appHeight * 0.7,
+        //             slideShowWidth: appWidth,
+        //           ),
+        //       ],
+        //     ),
+        //     // SliverFillRemaining(
+        //     //   hasScrollBody: false,
+        //     //   child: MaxWidthBox(
+        //     //       maxWidth: 1200,
+        //     //       backgroundColor: Colors.white,
+        //     //       child: Container()),
+        //     // ),
+        //   ],
+        // ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            if (currentWidgetToShow == widgetSlideShow)
+              SlideShow(
+                slideShowHeight: appHeight * 0.8,
+                slideShowWidth: appWidth,
+              )
+            else
+              Contact(
+                slideShowHeight: appHeight * 0.8,
+                slideShowWidth: appWidth,
+              ),
+            Footer(
+              footerHeight: appHeight * 0.1,
+              footerWidth: appWidth,
+            ),
+          ],
+        ),
       ),
     );
   }

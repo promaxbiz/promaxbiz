@@ -34,7 +34,7 @@ class _WebMenuBarState extends State<WebMenuBar> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             if (appWidth > 200) widget.webModel.getWebAppLogo(context),
-            if (appWidth > 600) widget.webModel.getWebAppTitle(context),
+            if (appWidth > 350) widget.webModel.getWebAppTitle(context),
             // webModel.getWebAppLogo(context),
             // webModel.getWebAppTitle(context),
           ],
