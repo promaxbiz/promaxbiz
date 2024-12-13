@@ -37,6 +37,16 @@ class _SlideShowState extends State<SlideShow> {
     });
   }
 
+  void decrementSlide() {
+    setState(() {
+      if (currentSlide > 0) {
+        currentSlide--;
+      } else {
+        currentSlide = (slides.length - 1);
+      }
+    });
+  }
+
   void startTimer() {
     countdownTimer = Timer.periodic(
       const Duration(
@@ -102,7 +112,8 @@ class _SlideShowState extends State<SlideShow> {
                   });
                 },
                 icon: Icon(
-                  playingSlides ? Icons.pause_circle : Icons.play_circle_fill,
+                  playingSlides ? Icons.pause_circle : Icons.play_circle,
+                  color: Colors.white,
                 ),
               ),
             ],

@@ -74,7 +74,7 @@ class CatAd extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => launchUrlString(
-        'https://play.google.com/apps/testing/com.promaxbiz.chain_activities',
+        'https://play.google.com/store/apps/details?id=com.promaxbiz.chain_activities',
       ),
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints boxConstraints) {
@@ -82,10 +82,16 @@ class CatAd extends StatelessWidget {
             padding: const EdgeInsets.all(50.0),
             decoration: BoxDecoration(
               gradient: LinearGradient(
+                begin: (boxConstraints.maxWidth < 500)
+                    ? Alignment.topCenter
+                    : Alignment.centerLeft,
+                end: (boxConstraints.maxWidth < 500)
+                    ? Alignment.bottomCenter
+                    : Alignment.centerRight,
                 colors: [
                   Colors.black,
                   Colors.blueGrey.shade400,
-                  if (boxConstraints.maxWidth < 500) Colors.black,
+                  //if (boxConstraints.maxWidth < 500) Colors.black,
                 ],
               ),
             ),
