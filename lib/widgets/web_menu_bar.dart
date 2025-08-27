@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:promaxbiz/model/web_model.dart';
+import 'package:promaxbiz/utils/common_logic.dart';
 import 'package:promaxbiz/utils/constants.dart';
+import 'package:promaxbiz/utils/menu_options.dart';
+import 'package:promaxbiz/widgets/image_icon_label.dart';
 
 /// Menu/Navigation Bar
 ///
@@ -26,6 +29,48 @@ class WebMenuBar extends StatefulWidget {
 }
 
 class _WebMenuBarState extends State<WebMenuBar> {
+  // Function to handle the navigation based on the selected option.
+  // Future<void> handleMenuSelection(
+  //     BuildContext context, MenuOptions value) async {
+  //   switch (value) {
+  //     case MenuOptions.addEditChain:
+  //       NavigatorState nav = Navigator.of(context);
+  //       ChainList chainList = Provider.of<ChainList>(
+  //         context,
+  //         listen: false,
+  //       );
+  //       FilePickerResult? result = await FilePicker.platform.pickFiles(
+  //         type: FileType.custom,
+  //         allowedExtensions: ["json"],
+  //       );
+
+  //       if (result != null) {
+  //         Chain? chain = await chainList.uploadChain(
+  //           String.fromCharCodes(result.files.single.bytes!),
+  //         );
+  //         if (chain != null) {
+  //           chain.edit = true;
+  //           await nav.pushNamed(
+  //             AddChainScreen.routename,
+  //             arguments: chain,
+  //           );
+  //         }
+  //       } else {
+  //         // User canceled the picker
+  //       }
+
+  //       break;
+  //     case MenuOptions.createNewChain:
+  //       Navigator.of(
+  //         context,
+  //       ).pushReplacementNamed(AddChainScreen.routename);
+  //       break;
+  //     case MenuOptions.playChain:
+  //       Navigator.of(context).pushReplacementNamed("/");
+  //       break;
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     // double appHeight = MediaQuery.of(context).size.height -
@@ -39,49 +84,76 @@ class _WebMenuBarState extends State<WebMenuBar> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                if (appWidth > 200)
-                  widget.webModel.getWebAppLogo(
-                    context,
-                    widget.menuBarHeight,
-                    widget.menuBarWidth,
-                  ),
-                if (appWidth > 350)
-                  widget.webModel.getWebAppTitle(
-                    context,
-                    widget.menuBarHeight,
-                    widget.menuBarWidth,
-                  ),
-                // webModel.getWebAppLogo(context),
-                // webModel.getWebAppTitle(context),
-              ],
+            child: InkWell(
+              onTap: () => widget.switchScreen(widgetSlideShow),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  if (appWidth > 200)
+                    widget.webModel.getWebAppLogo(
+                      context,
+                      widget.menuBarHeight,
+                      widget.menuBarWidth,
+                    ),
+                  if (appWidth > 350)
+                    widget.webModel.getWebAppTitle(
+                      context,
+                      widget.menuBarHeight,
+                      widget.menuBarWidth,
+                    ),
+                  // webModel.getWebAppLogo(context),
+                  // webModel.getWebAppTitle(context),
+                ],
+              ),
             ),
           ),
           if (appWidth > 600)
             Row(
               children: [
                 //...webModel.getMenuOptions(context),
-                TextButton(
-                  // onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                  //   context,
-                  //   MyHomePage.name,
-                  //   ModalRoute.withName(
-                  //     Navigator.defaultRouteName,
-                  //   ),
-                  // ),
-                  onPressed: () => widget.switchScreen(widgetSlideShow),
-                  child: Text(
-                    "HOME",
-                    style: Theme.of(context).textTheme.titleSmall,
+                PopupMenuButton<MenuOptions>(
+                  onSelected: (value) =>
+                      CommonLogic().handleMenuSelection(context, value),
+                  color: Theme.of(context).primaryColor,
+                  itemBuilder: (BuildContext context) {
+                    return <PopupMenuEntry<MenuOptions>>[
+                      // The sub-menu options.
+                      const PopupMenuItem<MenuOptions>(
+                        value: MenuOptions.addEditChain,
+                        child: Text('Upload & Edit Chain'),
+                      ),
+                      const PopupMenuItem<MenuOptions>(
+                        value: MenuOptions.createNewChain,
+                        child: Text('Create a New Chain'),
+                      ),
+                      // const PopupMenuItem<MenuOptions>(
+                      //   value: MenuOptions.playChain,
+                      //   child: Text('Play a Chain'),
+                      // ),
+                    ];
+                  },
+                  tooltip: "CHAINPLAY\nWeb Application",
+                  // The main menu button widget.
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      gradient: RadialGradient(colors: [
+                        Colors.amber,
+                        Colors.grey,
+                      ]),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: ImageIconLabel(
+                      imageUrl: assetMap["appChainPlayLogo"]!,
+                      label: "",
+                    ),
                   ),
                 ),
                 TextButton(
                   onPressed: () => widget.switchScreen(widgetAbout),
-                  child: Text(
-                    "CONTACT",
-                    style: Theme.of(context).textTheme.titleSmall,
+                  child: ImageIconLabel(
+                    imageUrl: assetMap["appProMaxBizLogo"]!,
+                    label: "Contact",
                   ),
                 ),
               ],

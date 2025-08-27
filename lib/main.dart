@@ -1,10 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:promaxbiz/apps/createchain/models/chain_list.dart';
+import 'package:promaxbiz/apps/createchain/screens/add_chain_screen.dart';
 import 'package:promaxbiz/pages/my_home_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        // Provider.value(
+        //   value: localNotifyService,
+        // ),
+        // Provider.value(
+        //   value: adState,
+        // ),
+        // Provider(
+        //   //create: (context) => ChainList(context, adState),
+        //   create: (context) => LocalNotificationService(),
+        // ),
+        ChangeNotifierProvider(
+          //create: (context) => ChainList(context, adState),
+          create: (context) => ChainList(context),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -29,6 +53,25 @@ class MyApp extends StatelessWidget {
           surface: Colors.grey,
           onSurface: Colors.white,
         ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+            ),
+            backgroundColor: WidgetStateProperty.resolveWith<Color>(
+              (states) => Colors.white,
+            ),
+            foregroundColor: WidgetStateProperty.resolveWith<Color>(
+              (states) => Colors.black,
+            ),
+            textStyle: WidgetStateProperty.resolveWith(
+              (states) => Theme.of(context).textTheme.labelLarge,
+            ),
+            iconColor: WidgetStateProperty.resolveWith<Color>(
+              (states) => Colors.black,
+            ),
+          ),
+        ),
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
             backgroundColor: WidgetStateProperty.all<Color>(Colors.black),
@@ -46,6 +89,9 @@ class MyApp extends StatelessWidget {
         iconButtonTheme: IconButtonThemeData(
           style: ButtonStyle(
             foregroundColor: WidgetStateProperty.all<Color>(
+              Colors.white,
+            ),
+            iconColor: WidgetStateProperty.all<Color>(
               Colors.white,
             ),
           ),
@@ -99,6 +145,9 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const MyHomePage(),
+      routes: {
+        AddChainScreen.routename: (context) => const AddChainScreen(),
+      },
     );
   }
 }
